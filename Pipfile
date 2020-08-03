@@ -10,6 +10,7 @@ scikit-image = "*"
 numpy = "*"
 cython = "*"
 python-igraph = "*"
+pycairo = "*"
 
 [requires]
 python_version = "3.8"
