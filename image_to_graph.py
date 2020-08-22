@@ -74,3 +74,8 @@ def image_to_graph_neighborhood_eight(img):
 
 def calc_edge_weight(val1, val2):
     return abs(int(val1) - int(val2))
+
+
+def image_to_mst(image):
+    g = image_to_graph(image)
+    return g.spanning_tree(weights=g.es['weight'], return_tree=True), g
