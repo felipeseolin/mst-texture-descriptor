@@ -1,5 +1,5 @@
 from statistics import stdev, mean
-from scipy.stats import skew, kurtosis, entropy, energy_distance
+from scipy.stats import skew, kurtosis, entropy
 
 
 # Cálculo vetores de características
@@ -10,7 +10,6 @@ def extract_values(values, is_dictionary=True):
             'standard_deviation': calc_standard_deviation(values),
             'skew': calc_skew(values),
             'kurtosis': calc_kurtosis(values),
-            'energy': calc_energy(values),
             'entropy': calc_entropy(values)
         }
     else:
@@ -18,7 +17,6 @@ def extract_values(values, is_dictionary=True):
                 calc_standard_deviation(values),
                 calc_skew(values),
                 calc_kurtosis(values),
-                calc_energy(values),
                 calc_entropy(values)
                 ]
 
@@ -46,9 +44,3 @@ def calc_kurtosis(values):
 # Cálculo da entropia
 def calc_entropy(values):
     return entropy(values)
-
-
-# Cálculo da energia
-def calc_energy(values):
-    return ''
-    # return energy_distance(values, )
