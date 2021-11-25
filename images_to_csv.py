@@ -3,14 +3,17 @@ from image_to_graph import image_to_mst
 from open_image import open_image
 from extract_values import extract_values
 from csv import DictWriter
+from util.progress_bar import progress
 
 
-def image_to_csv(dir='/mnt/5022A63622A620C8/TCC/tests/datasets/kylberg-texture-dataset/images/*.png'):
-    images = glob(dir)
+def image_to_csv(dir='/Users/seolin/Documents/TCC/image-texture-classification/datasets/USPTex/png/*.png'):
+    images = sorted(glob(dir))
     dic = []
-    print(f"Iniciando extração de {len(images)} imagens...")
+    total = len(images)
+    print(f"Iniciando extração de {total} imagens...")
     for i, image in enumerate(images):
-        print(f"- Imagem {i + 1}")
+        progress(i, total, status=f"Image {i + 1}/{total} - {image}")
+        # print(f"- Imagem {i + 1} de {len(images)}")
 
         file_name = get_file_name(image)
         image_class = get_image_class(file_name)
@@ -23,13 +26,16 @@ def image_to_csv(dir='/mnt/5022A63622A620C8/TCC/tests/datasets/kylberg-texture-d
 
         dic.append(values)
 
-    print('Salvando arquivo CSV...')
+    progress(total, total, status=f"Image {total}/{total} - {images[total - 1]}")
+
+    print('\nSalvando arquivo CSV...')
     save_csv(dic)
-    print('Finalizado: arquivo salvo em: /mnt/5022A63622A620C8/TCC/tests/mst.csv')
+    print('Finalizado: arquivo salvo em: /Users/seolin/Documents/TCC/image-texture-classification/datasets/USPTex'
+          '/mst.csv')
 
 
-def save_csv(dic, csv_file='/mnt/5022A63622A620C8/TCC/tests/mst.csv'):
-    cols = ['averate', 'standard_deviation', 'skew', 'kurtosis', 'entropy']
+def save_csv(dic, csv_file='/Users/seolin/Documents/TCC/image-texture-classification/datasets/USPTex/mst.csv'):
+    cols = ['class', 'averate', 'standard_deviation', 'skew', 'kurtosis', 'entropy']
     try:
         with open(csv_file, 'w') as csvfile:
             writer = DictWriter(csvfile, fieldnames=cols)

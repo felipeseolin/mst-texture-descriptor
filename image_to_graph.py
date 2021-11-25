@@ -1,4 +1,5 @@
 from igraph import Graph
+from skimage.util import img_as_ubyte
 
 
 def image_to_graph(img, neighborhood=8):
@@ -11,6 +12,7 @@ def image_to_graph(img, neighborhood=8):
 
 
 def image_to_graph_neighborhood_four(img):
+    img = img_as_ubyte(img)
     y, x = img.shape
     acc = 0
     vertices = []
@@ -38,6 +40,7 @@ def image_to_graph_neighborhood_four(img):
 
 
 def image_to_graph_neighborhood_eight(img):
+    img = img_as_ubyte(img)
     y, x = img.shape
     acc = 0
     vertices = []
